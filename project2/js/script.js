@@ -52,6 +52,7 @@ let fullScreenHands;
 let logoSound;
 let startMusic;
 let clockSound;
+let runCarpetSound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -529,6 +530,7 @@ function preload() {
   //SFX//
   logoSound = loadSound('assets/sounds/logoSoundFinal.mp3');
   clockSound = loadSound('assets/sounds/clockTick.mp3');
+  runCarpetSound = loadSound('assets/sounds/runCarpet.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');

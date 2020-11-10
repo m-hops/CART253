@@ -14,8 +14,8 @@ class SoundFX extends Interactable {
 
   draw() {
     push();
-    fill(255,100);
-    // noFill();
+    // fill(255,100);
+    noFill();
     noStroke();
     rect(this.x,this.y,this.width,this.height);
     pop();
