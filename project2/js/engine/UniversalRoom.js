@@ -19,8 +19,6 @@ class UniversalRoom extends Interactable {
         if(this.roomObjects[i].processMouseEvent()) return true;
       }
     }
-    spawnInteractWheel(new DummyObject());
-    return true;
   }
 
   //ATTACHES UNIVERSAL ROOM CONTROL TO RELATED ROOM//
