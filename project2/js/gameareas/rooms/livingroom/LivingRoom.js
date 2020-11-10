@@ -9,9 +9,10 @@ class LivingRoom extends UniversalRoom {
     this.roomObjects.push(new Wallcrack(width/2,height/2));
     this.roomObjects.push(new Armchair(width/2,height/2));
     this.roomObjects.push(new File(width/2,height/2));
+    this.roomObjects.push(new HorseHead(width/2,height/2));
     this.roomObjects.push(new Navigation(1430,470,80,152,'diningroom'));
     this.roomObjects.push(new Navigation(36,360,100,70,'fronthall'));
-    this.roomObjects.push(new SoundFX(1295,95,50,50,clockSound,this));
+    this.roomObjects.push(new SoundFX(1295,95,50,50,clockSound,this,0.1));
   }
 
   draw(){

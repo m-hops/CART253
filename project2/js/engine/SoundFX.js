@@ -1,8 +1,9 @@
 class SoundFX extends Interactable {
-  constructor(x,y,w,h,soundFX,hostRoom) {
+  constructor(x,y,w,h,soundFX,hostRoom,volume) {
     super(x,y,w,h);
     this.soundFX = soundFX;
     this.hostRoom = hostRoom;
+    this.volume = volume;
   }
 
   run() {
@@ -22,6 +23,7 @@ class SoundFX extends Interactable {
   }
 
   onEnter() {
+    this.soundFX.setVolume(this.volume)
     this.soundFX.loop();
   }
 
