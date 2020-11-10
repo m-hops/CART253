@@ -205,9 +205,6 @@ function howToScreen2Function() {
 function livingRoomFunction() {
   livingRoomScene.run();
   livingRoomScene.draw();
-
-  fullScreenScareOBJ.run();
-  fullScreenScareOBJ.draw();
 }
 
 //KITCHEN ROOM COMPONENTS//
@@ -303,6 +300,7 @@ function textDynamicShadow(writing, size, xmin, xmax, ymin, ymax) {
   pop();
 }
 
+//SCREEN FLICKER EFFECT FOR START MENU//
 function screenFlicker(){
   screenFlickerSpecs.color = random(0,100);
 
@@ -480,6 +478,13 @@ function mouseClicked() {
     }
   }
 
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR KITCHEN//
+  else if (menu == 'basementdoor') {
+    if (basementDoorScene.processMouseEvent()) {
+      return;
+    }
+  }
+
   haveInteractWheel = false;
 }
 
@@ -561,5 +566,4 @@ function draw() {
   cursorIcon();
 
   blackBorder();
-  
 }
