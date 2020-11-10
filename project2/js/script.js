@@ -5,7 +5,7 @@ MADELINE ZAYTSOFF
 A POINT AND CLICK HORROR ADVENTURE
 **************************************************/
 //GLOBAL VARIABLE FOR MENU NAVIGATION//
-let menu = 'livingroom';
+let menu = 'clickToStart';
 let menuOnEnter;
 
 //OBJ NAMES//
