@@ -36,8 +36,8 @@ class FloatingPlant1 extends WheelObject {
   //DRAWS HITBOX; LEAVE ALONE FOR COLLISION DETECTION TO WORK//
   draw(){
     push();
-    fill(255,125);
-    // noFill();
+    // fill(255,125);
+    noFill();
     noStroke();
     rect(this.x,this.y,this.width,this.height);
     pop();
