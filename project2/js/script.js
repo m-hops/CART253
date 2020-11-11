@@ -47,12 +47,16 @@ let blackBar;
 let userNotepadIMG;
 let shadowMirrorFrontHall;
 let fullScreenHands;
+let television;
 
 //SOUND PRELOAD NAMES//
 let logoSound;
 let startMusic;
+let droneMusic;
 let clockSound;
 let runCarpetSound;
+let leaveRustleSound;
+let heartbeatSound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -92,10 +96,15 @@ let screenFlickerSpecs = {
   color: 0,
   alpha: 20
 }
+let dsImageSpec = {
+  offsetX: -250,
+  offsetY: 0
+}
 
 //TEXT GENERATOR TITLES//
 let description;
 let descriptionActive = false;
+let descriptionImage = false;
 
 //GLOBAL VOLUME CONTROL//
 let musicOption = true;
@@ -180,7 +189,7 @@ function introLogo() {
 function startScreenFunction() {
   startScreen.drawStartScreen();
 
-  screenFlicker();
+  screenFlicker(0,100,20,20);
 
   startScreen.titleText();
 
@@ -302,8 +311,9 @@ function textDynamicShadow(writing, size, xmin, xmax, ymin, ymax) {
 }
 
 //SCREEN FLICKER EFFECT FOR START MENU//
-function screenFlicker(){
-  screenFlickerSpecs.color = random(0,100);
+function screenFlicker(cLow,cHigh,aLow,aHigh){
+  screenFlickerSpecs.color = random(cLow,cHigh);
+  screenFlickerSpecs.alpha = random(aLow,aHigh);
 
   push();
   fill(screenFlickerSpecs.color,screenFlickerSpecs.alpha);
@@ -323,6 +333,16 @@ function textStaticShadow() {
 function descriptionSet(writing) {
   description = writing;
   descriptionActive = true;
+  descriptionImage = false;
+}
+
+//CHANGES STATE OF DESCRIPTIVE TEXT WITH IMAGE SO IT CAN BECOME ACTIVE//
+function descriptionImageSet(writing,optImage) {
+  description = writing;
+  dsImage = optImage;
+  descriptionActive = true;
+  descriptionImage = true;
+
 }
 
 //DESCRIPTION GENERATOR FOR BOTTOM SCREEN//
@@ -331,6 +351,12 @@ function descriptionDraw() {
     push();
     image(blackBar, descriptiveTextBKG.bbX, descriptiveTextBKG.bbY);
     pop();
+
+    if (descriptionImage){
+      push();
+      image(dsImage,dsImageSpec.offsetX,dsImageSpec.offsetY);
+      pop();
+    }
 
     push();
     fill(descriptiveTextBKG.textColor);
@@ -363,20 +389,32 @@ function spawnInteractWheel(object) {
 
 //MENU NAVIGATION//
 function goToMenu(menuID) {
+
+  //USED FOR DEACTIVATION OF SOUND WHEN LEAVING ROOM//
   if (menu == 'livingroom'){
     livingRoomScene.onExit();
   } else if (menu == 'fronthall'){
     frontHallScene.onExit();
+  }else if (menu == 'diningroom'){
+    diningRoomScene.onExit();
+  }else if (menu == 'basementdoor'){
+    basementDoorScene.onExit();
   }
 
+  //STANDARD MENU NAVIGATION//
   menu = menuID;
   menuOnEnter = true;
   toggleMusic();
 
+  //USED FOR ACTIVATION OF SOUND WHEN LEAVING ROOM//
   if (menu == 'livingroom'){
     livingRoomScene.onEnter();
   } else if (menu == 'fronthall'){
     frontHallScene.onEnter();
+  }else if (menu == 'diningroom'){
+    diningRoomScene.onEnter();
+  }else if (menu == 'basementdoor'){
+    basementDoorScene.onEnter();
   }
 }
 
@@ -526,14 +564,18 @@ function preload() {
   logo = loadImage('assets/images/introLogo/companyLogo.png');
   blankBKG = loadImage('assets/images/blankBKG.png');
   fullScreenHands = loadImage('assets/images/openHands.png');
+  television = loadImage('assets/images/rooms/Living Room/tv.png');
 
   //SFX//
   logoSound = loadSound('assets/sounds/logoSoundFinal.mp3');
   clockSound = loadSound('assets/sounds/clockTick.mp3');
   runCarpetSound = loadSound('assets/sounds/runCarpet.mp3');
+  leaveRustleSound = loadSound('assets/sounds/leaveRustle.mp3');
+  heartbeatSound = loadSound('assets/sounds/heartbeat.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');
+  droneMusic = loadSound('assets/sounds/droneTone.mp3');
 }
 
 //ONE TIME CALLS//

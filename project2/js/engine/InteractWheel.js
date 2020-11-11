@@ -40,6 +40,8 @@ class InteractWheel extends GameOBJ {
 
   //MOVEMENT FORUMLAS FOR INTERACTWHEEL WHEN CALLED AS WELL AS CONSTRAINTS//
   run() {
+
+        //BRINGS WHEEL FROM NON-EXISTANT TO SPINNING LARGER//
         this.size = this.size + this.speed;
         this.size = constrain(this.size, 0, 200);
 

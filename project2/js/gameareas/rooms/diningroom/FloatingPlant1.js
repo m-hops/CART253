@@ -1,4 +1,4 @@
-//HORSE HAND IN LIVING ROOM//
+//LEFT FLOATING PLANT IN THE DINING ROOM//
 class FloatingPlant1 extends WheelObject {
 
 //ADJUSTS DIMENSIONS OF HITBOX//
@@ -27,6 +27,7 @@ class FloatingPlant1 extends WheelObject {
   onTouch(){
     console.log('touchHit');
     descriptionSet('You put your hand into the plant and immediately recoil.\nYou swear one of the vines attempted to grab you.');
+    leaveRustleSound.play();
   }
 
   run(){

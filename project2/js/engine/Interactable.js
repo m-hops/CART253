@@ -12,7 +12,7 @@ class Interactable extends GameOBJ {
   }
 
   onClick(){
-
+    //HANDLED IN ATTACHED OBJECTS//
   }
 
 }

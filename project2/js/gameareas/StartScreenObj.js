@@ -96,6 +96,7 @@ class StartScreenObj{
 
   drawStartScreen(){
 
+    //GIVES SCREEN MINOR SHAKE//
     let movement = random(-1,1);
 
     image(startScreenBKG,this.x + movement,this.y + movement);

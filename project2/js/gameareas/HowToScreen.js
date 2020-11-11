@@ -12,6 +12,7 @@ class HowToScreen {
     this.backButtonGBH = 59;
   }
 
+  //page1 page2 are static image intructions//
   page1(){
     image(howTo1,0,0);
   }
@@ -20,6 +21,7 @@ class HowToScreen {
     image(howTo2,0,0);
   }
 
+  //NEXTBUTTON AND BACKBUTTON NAVIGAITON//
   nextButton(){
     push();
     noFill();

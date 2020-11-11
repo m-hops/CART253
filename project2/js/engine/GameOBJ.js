@@ -11,7 +11,7 @@ class GameOBJ {
       this.height = h;
   }
 
-//RETURNS COLLISION DETECTION TRUE OR FALSE//
+  //RETURNS COLLISION DETECTION TRUE OR FALSE//
   isPointInside(x,y){
       return (x >= this.x &&
           y >= this.y &&
@@ -20,18 +20,18 @@ class GameOBJ {
   }
 
   run(){
-
+    //HANDLED IN ATTACHED OBJECTS//
   }
 
   draw(){
-
+    //HANDLED IN ATTACHED OBJECTS//
   }
 
   onEnter(){
-
+    //HANDLED IN ATTACHED OBJECTS//
   }
 
   onExit(){
-    
+    //HANDLED IN ATTACHED OBJECTS//
   }
 }

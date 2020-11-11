@@ -1,14 +1,14 @@
-//TV IN LIVING ROOM//
-class TV extends WheelObject {
+//DAGGER IN THE DINING ROOM//
+class Dagger extends WheelObject {
 
 //ADJUSTS DIMENSIONS OF HITBOX//
   constructor(x,y){
-    super(x,y,170,135);
-    this.x = 20;
-    this.y = 165;
+    super(x,y,45,70);
+    this.x = 1120;
+    this.y = 361;
 
   //FLIP TRUE AND FALSE IN ACCORDANCE TO WHETHER ATTRIBUTE IS ACTIVE//
-    this.soundActive = true;
+    this.soundActive = false;
     this.sightActive = true;
     this.touchActive = true;
   }
@@ -16,17 +16,16 @@ class TV extends WheelObject {
   //FILL IN DESCRIPTION SET TO PRODUCE TEXT//
   onSight(){
     console.log('sightHit');
-    descriptionImageSet('The news anchors have stopped talking and look like\n they\'re staring right at you. \nThe unnatural smiles on their faces cause your stomach to drop.',television);
+    descriptionSet('A silver goblet.\nFrom the inscriptions on the outside, you recognize it\'s purpose as a\ncontainer for holy water in exorcism ceremonies.');
   }
 
   onSound(){
     console.log('soundHit');
-    descriptionSet('The electric hum of the television blends into the rooms ambient noise.');
   }
 
   onTouch(){
     console.log('touchHit');
-    descriptionSet('You slide your finger across the screen and inspect the red liquid.\nThe metalic smell confirms your suspicion as to what it is.');
+    descriptionSet('You attempt to pick up the cup but are met with a sharp pain at your fingertips.\nThe cup feels as hot as a stove top. But how?');
   }
 
   run(){
@@ -36,6 +35,7 @@ class TV extends WheelObject {
   //DRAWS HITBOX; LEAVE ALONE FOR COLLISION DETECTION TO WORK//
   draw(){
     push();
+    // fill(255,125);
     noFill();
     noStroke();
     rect(this.x,this.y,this.width,this.height);

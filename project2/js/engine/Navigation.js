@@ -5,6 +5,7 @@ class Navigation extends Interactable {
     this.destinationRoom = destinationRoom;
   }
 
+  //PREVENTS INTERACT WHEEL FROM LAUNCHING//
   onClick(){
     haveInteractWheel = false;
     descriptionRemove();
@@ -12,9 +13,10 @@ class Navigation extends Interactable {
   }
 
   run() {
-
+    //LEFT BLANK FOR NOW; RELATED TO GAMEOBJ//
   }
 
+  //TARGETING SHAPE//
   draw() {
     push();
     // fill(255,100);
