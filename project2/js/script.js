@@ -5,7 +5,7 @@ MADELINE ZAYTSOFF
 A POINT AND CLICK HORROR ADVENTURE
 **************************************************/
 //GLOBAL VARIABLE FOR MENU NAVIGATION//
-let menu = 'clickToStart';
+let menu = 'kitchen';
 let menuOnEnter;
 
 //OBJ NAMES//
@@ -48,6 +48,10 @@ let userNotepadIMG;
 let shadowMirrorFrontHall;
 let fullScreenHands;
 let television;
+let fullScreenHead;
+let fullScreenLeftHand;
+let fullScreenRightHand;
+let fullScreenShoulders;
 
 //SOUND PRELOAD NAMES//
 let logoSound;
@@ -121,6 +125,9 @@ let introLogoSpec = {
   fadeOutTime: 1000
 }
 
+//BORDER CONTROL//
+let borderActive = true;
+
 //CLICK START SCREEN; BEGINNING OF GAME//
 function clickToStartFunction() {
 
@@ -143,6 +150,8 @@ function clickToStartFunction() {
   textSize(clickToStartSpecs.fSize);
   text('click anywhere to start', width/2 + movement, height/2 + movement);
   pop();
+
+  screenFlicker(0,50,15,20);
 }
 
 //CURSOR OVERLAY//
@@ -221,6 +230,8 @@ function livingRoomFunction() {
 function kitchenRoomFunction() {
   kitchenRoomScene.run();
   kitchenRoomScene.draw();
+
+  fullScreenScare();
 }
 
 //DINING ROOM COMPONENETS//
@@ -283,6 +294,12 @@ function menuNav(){
     if (menu == 'basementdoor') {
       basementDoorFunction();
     }
+}
+
+//FULL SCREEN SCARE//
+function fullScreenScare(){
+  fullScreenScareOBJ.run();
+  fullScreenScareOBJ.draw();
 }
 
 //DYNAMIC SHADOW GENERATOR//
@@ -566,6 +583,12 @@ function preload() {
   fullScreenHands = loadImage('assets/images/openHands.png');
   television = loadImage('assets/images/rooms/Living Room/tv.png');
 
+  //FULL SCREEN SCARE//
+  fullScreenHead = loadImage('assets/images/bigScare/head.png');
+  fullScreenLeftHand = loadImage('assets/images/bigScare/leftHand.png');
+  fullScreenRightHand = loadImage('assets/images/bigScare/rightHand.png');
+  fullScreenShoulders = loadImage('assets/images/bigScare/torso.png');
+
   //SFX//
   logoSound = loadSound('assets/sounds/logoSoundFinal.mp3');
   clockSound = loadSound('assets/sounds/clockTick.mp3');
@@ -609,5 +632,7 @@ function draw() {
 
   cursorIcon();
 
-  blackBorder();
+  if (borderActive){
+    blackBorder();
+  } else return;
 }
