@@ -132,26 +132,26 @@ let borderActive = true;
 function clickToStartFunction() {
 
   //STATIC BACKGROUND//
-  image(blankBKG,0,0);
+  image(blankBKG, 0, 0);
 
   //VARIOUS FLICKERING BACKGROUND TEXT//
-  textDynamicShadow('help me',30,500,810,250,420);
-  textDynamicShadow('im sorry mom & dad',30,500,810,250,420);
-  textDynamicShadow('im in hell',30,500,810,250,420);
-  textDynamicShadow('the flies stole my soul',30,500,810,250,420);
+  textDynamicShadow('help me', 30, 500, 810, 250, 420);
+  textDynamicShadow('im sorry mom & dad', 30, 500, 810, 250, 420);
+  textDynamicShadow('im in hell', 30, 500, 810, 250, 420);
+  textDynamicShadow('the flies stole my soul', 30, 500, 810, 250, 420);
 
   //MOVEMENT FOR CLICK ANYWHERE TEXT//
-  let movement = random(-2,1);
+  let movement = random(-2, 1);
 
   //CLICK ANYWHERE TEXT//
   push();
   fill(clickToStartSpecs.fColor);
   textFont(glitchFontBold);
   textSize(clickToStartSpecs.fSize);
-  text('click anywhere to start', width/2 + movement, height/2 + movement);
+  text('click anywhere to start', width / 2 + movement, height / 2 + movement);
   pop();
 
-  screenFlicker(0,50,15,20);
+  screenFlicker(0, 50, 15, 20);
 }
 
 //CURSOR OVERLAY//
@@ -198,7 +198,7 @@ function introLogo() {
 function startScreenFunction() {
   startScreen.drawStartScreen();
 
-  screenFlicker(0,100,20,20);
+  screenFlicker(0, 100, 20, 20);
 
   startScreen.titleText();
 
@@ -253,51 +253,51 @@ function basementDoorFunction() {
 }
 
 //MENU NAVIGATION TREE//
-function menuNav(){
+function menuNav() {
 
-    if (menu == 'clickToStart') {
-      clickToStartFunction();
-    }
+  if (menu == 'clickToStart') {
+    clickToStartFunction();
+  }
 
-    if (menu == 'introduction') {
-      introLogo();
-    }
+  if (menu == 'introduction') {
+    introLogo();
+  }
 
-    if (menu == 'start') {
-      startScreenFunction();
-    }
+  if (menu == 'start') {
+    startScreenFunction();
+  }
 
-    if (menu == 'howto1') {
-      howToScreen1Function();
-    }
+  if (menu == 'howto1') {
+    howToScreen1Function();
+  }
 
-    if (menu == 'howto2') {
-      howToScreen2Function();
-    }
+  if (menu == 'howto2') {
+    howToScreen2Function();
+  }
 
-    if (menu == 'livingroom') {
-      livingRoomFunction();
-    }
+  if (menu == 'livingroom') {
+    livingRoomFunction();
+  }
 
-    if (menu == 'kitchen') {
-      kitchenRoomFunction();
-    }
+  if (menu == 'kitchen') {
+    kitchenRoomFunction();
+  }
 
-    if (menu == 'diningroom') {
-      diningRoomFunction();
-    }
+  if (menu == 'diningroom') {
+    diningRoomFunction();
+  }
 
-    if (menu == 'fronthall') {
-      frontHallFunction();
-    }
+  if (menu == 'fronthall') {
+    frontHallFunction();
+  }
 
-    if (menu == 'basementdoor') {
-      basementDoorFunction();
-    }
+  if (menu == 'basementdoor') {
+    basementDoorFunction();
+  }
 }
 
 //FULL SCREEN SCARE//
-function fullScreenScare(){
+function fullScreenScare() {
   fullScreenScareOBJ.run();
   fullScreenScareOBJ.draw();
 }
@@ -328,13 +328,13 @@ function textDynamicShadow(writing, size, xmin, xmax, ymin, ymax) {
 }
 
 //SCREEN FLICKER EFFECT FOR START MENU//
-function screenFlicker(cLow,cHigh,aLow,aHigh){
-  screenFlickerSpecs.color = random(cLow,cHigh);
-  screenFlickerSpecs.alpha = random(aLow,aHigh);
+function screenFlicker(cLow, cHigh, aLow, aHigh) {
+  screenFlickerSpecs.color = random(cLow, cHigh);
+  screenFlickerSpecs.alpha = random(aLow, aHigh);
 
   push();
-  fill(screenFlickerSpecs.color,screenFlickerSpecs.alpha);
-  rect(screenFlickerSpecs.x,screenFlickerSpecs.y,width,height);
+  fill(screenFlickerSpecs.color, screenFlickerSpecs.alpha);
+  rect(screenFlickerSpecs.x, screenFlickerSpecs.y, width, height);
   pop();
 }
 
@@ -354,7 +354,7 @@ function descriptionSet(writing) {
 }
 
 //CHANGES STATE OF DESCRIPTIVE TEXT WITH IMAGE SO IT CAN BECOME ACTIVE//
-function descriptionImageSet(writing,optImage) {
+function descriptionImageSet(writing, optImage) {
   description = writing;
   dsImage = optImage;
   descriptionActive = true;
@@ -369,9 +369,9 @@ function descriptionDraw() {
     image(blackBar, descriptiveTextBKG.bbX, descriptiveTextBKG.bbY);
     pop();
 
-    if (descriptionImage){
+    if (descriptionImage) {
       push();
-      image(dsImage,dsImageSpec.offsetX,dsImageSpec.offsetY);
+      image(dsImage, dsImageSpec.offsetX, dsImageSpec.offsetY);
       pop();
     }
 
@@ -408,13 +408,13 @@ function spawnInteractWheel(object) {
 function goToMenu(menuID) {
 
   //USED FOR DEACTIVATION OF SOUND WHEN LEAVING ROOM//
-  if (menu == 'livingroom'){
+  if (menu == 'livingroom') {
     livingRoomScene.onExit();
-  } else if (menu == 'fronthall'){
+  } else if (menu == 'fronthall') {
     frontHallScene.onExit();
-  }else if (menu == 'diningroom'){
+  } else if (menu == 'diningroom') {
     diningRoomScene.onExit();
-  }else if (menu == 'basementdoor'){
+  } else if (menu == 'basementdoor') {
     basementDoorScene.onExit();
   }
 
@@ -424,13 +424,13 @@ function goToMenu(menuID) {
   toggleMusic();
 
   //USED FOR ACTIVATION OF SOUND WHEN LEAVING ROOM//
-  if (menu == 'livingroom'){
+  if (menu == 'livingroom') {
     livingRoomScene.onEnter();
-  } else if (menu == 'fronthall'){
+  } else if (menu == 'fronthall') {
     frontHallScene.onEnter();
-  }else if (menu == 'diningroom'){
+  } else if (menu == 'diningroom') {
     diningRoomScene.onEnter();
-  }else if (menu == 'basementdoor'){
+  } else if (menu == 'basementdoor') {
     basementDoorScene.onEnter();
   }
 }
@@ -444,9 +444,9 @@ function toggleMusic() {
 
   if (musicOption == false) {
     startMusic.stop();
-  } else if (menu != 'start' && menu != 'howto1' && menu != 'howto2'){
+  } else if (menu != 'start' && menu != 'howto1' && menu != 'howto2') {
     startMusic.stop();
-  } else if (!startMusic.isPlaying()){
+  } else if (!startMusic.isPlaying()) {
     startMusic.setVolume(0.3);
     startMusic.loop();
   }
@@ -462,7 +462,7 @@ function mouseClicked() {
     }
   }
 
-  if (menu == 'clickToStart'){
+  if (menu == 'clickToStart') {
     goToMenu('introduction');
   }
 
@@ -632,7 +632,7 @@ function draw() {
 
   cursorIcon();
 
-  if (borderActive){
+  if (borderActive) {
     blackBorder();
   } else return;
 }
