@@ -7,6 +7,7 @@ class UniversalRoom extends Interactable {
     this.backgroundY = 0;
     this.backgroundSpeed = 5;
     this.roomObjects = [];
+    this.currentMouseOverObject = null;
   }
 
   //ARRAY FOR ROOMS CALLED ONCE MOUSE IS CLICKED IN LINKED ROOM//
@@ -17,6 +18,25 @@ class UniversalRoom extends Interactable {
     for (let i = 0; i < this.roomObjects.length; i++){
       if (this.roomObjects[i].isPointInside(mouseX,mouseY)){
         if(this.roomObjects[i].processMouseEvent()) return true;
+      }
+    }
+  }
+
+  processMouseMove() {
+
+    if (this.currentMouseOverObject != null){
+      if (!this.currentMouseOverObject.isPointInside(mouseX,mouseY)){
+        this.currentMouseOverObject.onMouseLeave();
+        this.currentMouseOverObject = null;
+      }
+    }
+
+    for (let i = 0; i < this.roomObjects.length; i++){
+      if (this.roomObjects[i].isPointInside(mouseX,mouseY)){
+        if(this.currentMouseOverObject != this.roomObjects[i]){
+          this.roomObjects[i].onMouseEnter();
+          this.currentMouseOverObject = this.roomObjects[i];
+        }
       }
     }
   }

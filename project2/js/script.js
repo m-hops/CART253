@@ -155,18 +155,6 @@ function clickToStartFunction() {
   screenFlicker(0, 50, 15, 20);
 }
 
-//CURSOR OVERLAY//
-function cursorIcon() {
-  if (mouseX > 70 &&
-    mouseX < 1129 &&
-    mouseY > 63 &&
-    mouseY < 634) {
-    cursor('assets/images/cursorIconOverlay.png');
-  } else {
-    cursor(ARROW);
-  }
-}
-
 //HIDDEN BLACKBORDER//
 function blackBorder() {
   image(blackBorderOverlay, 0, 0);
@@ -543,6 +531,45 @@ function mouseClicked() {
   haveInteractWheel = false;
 }
 
+//HIGHLIGHTS INTERACTABLES BY CHANGING MOUSE COLOR//
+function mouseMoved() {
+
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR LIVING ROOM//
+  if (menu == 'livingroom') {
+    if (livingRoomScene.processMouseMove()) {
+      return;
+    }
+  }
+
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR FRONT HALL//
+  else if (menu == 'fronthall') {
+    if (frontHallScene.processMouseMove()) {
+      return;
+    }
+  }
+
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR DINING ROOM//
+  else if (menu == 'diningroom') {
+    if (diningRoomScene.processMouseMove()) {
+      return;
+    }
+  }
+
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR KITCHEN//
+  else if (menu == 'kitchen') {
+    if (kitchenRoomScene.processMouseMove()) {
+      return;
+    }
+  }
+
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR KITCHEN//
+  else if (menu == 'basementdoor') {
+    if (basementDoorScene.processMouseMove()) {
+      return;
+    }
+  }
+}
+
 //EXTERNAL MEDIA PRELOAD//
 function preload() {
 
@@ -618,6 +645,8 @@ function setup() {
   logoIntro = new LogoOBJ();
   // fullScreenScareOBJ = new FullScreenScare();
 
+  cursor('assets/images/cursorIconOverlay.png');
+
   toggleMusic();
 }
 
@@ -630,7 +659,7 @@ function draw() {
 
   menuNav();
 
-  cursorIcon();
+
 
   if (borderActive) {
     blackBorder();
