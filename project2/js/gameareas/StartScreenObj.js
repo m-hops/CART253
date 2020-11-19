@@ -85,13 +85,6 @@ class StartScreenObj{
     rect(this.startX,offsetOptY,rectOptW,rectOptH);
     pop();
 
-    push();
-    fill(this.color);
-    textFont(glitchFont);
-    textSize(this.menuSize);
-    textStaticShadow();
-    text('options', this.optX, this.optY);
-    pop();
   }
 
   drawStartScreen(){

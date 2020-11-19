@@ -5,7 +5,7 @@ MADELINE ZAYTSOFF
 A POINT AND CLICK HORROR ADVENTURE
 **************************************************/
 //GLOBAL VARIABLE FOR MENU NAVIGATION//
-let menu = 'kitchen';
+let menu = 'clickToStart';
 let menuOnEnter;
 
 //OBJ NAMES//
@@ -231,8 +231,6 @@ function livingRoomFunction() {
 function kitchenRoomFunction() {
   kitchenRoomScene.run();
   kitchenRoomScene.draw();
-
-  fullScreenScare();
 }
 
 //DINING ROOM COMPONENETS//
@@ -298,10 +296,10 @@ function menuNav() {
 }
 
 //FULL SCREEN SCARE//
-function fullScreenScare() {
-  fullScreenScareOBJ.run();
-  fullScreenScareOBJ.draw();
-}
+// function fullScreenScare() {
+//   fullScreenScareOBJ.run();
+//   fullScreenScareOBJ.draw();
+// }
 
 //DYNAMIC SHADOW GENERATOR//
 function textDynamicShadow(writing, size, xmin, xmax, ymin, ymax) {
@@ -618,7 +616,7 @@ function setup() {
   frontHallScene = new FrontHall();
   basementDoorScene = new BasementDoor();
   logoIntro = new LogoOBJ();
-  fullScreenScareOBJ = new FullScreenScare();
+  // fullScreenScareOBJ = new FullScreenScare();
 
   toggleMusic();
 }

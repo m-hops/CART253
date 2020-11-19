@@ -133,9 +133,11 @@ class FullScreenScare {
       }
 
       //CONTAINS INSTRUCTIONS TO ZOOM INTO THE BASEMENT AND RESET THE GAME//
-      } else if (this.state == 'stage4') {
+      }
 
-    }
+      // else if (this.state == 'stage4') {}
+
+
 
   }
 
@@ -205,6 +207,5 @@ class FullScreenScare {
       rotate(350);
       image(fullScreenRightHand, this.xrh, this.yrh);
       pop();
-    } else if (this.state == 'stage4')
-  }
+    } 
 }
