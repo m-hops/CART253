@@ -52,6 +52,7 @@ let fullScreenHead;
 let fullScreenLeftHand;
 let fullScreenRightHand;
 let fullScreenShoulders;
+let basementEntranceOpenBKG;
 
 //SOUND PRELOAD NAMES//
 let logoSound;
@@ -563,6 +564,7 @@ function preload() {
   diningRoomBKG = loadImage('assets/images/rooms/Dining Room/diningRoomBKG.png');
   frontHallBKG = loadImage('assets/images/rooms/Front Hall/fronthallBKG.png');
   basementEntranceBKG = loadImage('assets/images/rooms/BasementDoor/basementDoor.png');
+  basementEntranceOpenBKG = loadImage('assets/images/rooms/BasementDoor/basementDoorOpen.png');
 
   //LEVEL ASSETS//
   shadowMirrorFrontHall = loadImage('assets/images/rooms/Front Hall/shadowMirror.png');
