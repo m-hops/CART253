@@ -69,6 +69,7 @@ class UniversalRoom extends Interactable {
       descriptionRemove();
     }
 
+    //LOCKS OBJECTS IN PLACE TO ENSURE INTERACTIVE ACCURACY//
     if (this.backgroundX + offsetX >= 50 || this.backgroundX + offsetX <= -500){
       offsetX = 0;
     }
@@ -80,6 +81,7 @@ class UniversalRoom extends Interactable {
     this.backgroundX += offsetX;
     this.backgroundY += offsetY;
 
+    //ARRAY TO APPLY TO WHATEVER ROOM IS CALLED//
     for (let i = 0; i < this.roomObjects.length; i++){
       this.roomObjects[i].x += offsetX;
       this.roomObjects[i].y += offsetY;
@@ -87,6 +89,8 @@ class UniversalRoom extends Interactable {
   }
 
   draw(){
+
+    //CALLS ON THE ROOM IMAGES AND INTERACT WHEEL//
     for (let i = 0; i < this.roomObjects.length; i++){
       this.roomObjects[i].draw();
     }
@@ -100,6 +104,7 @@ class UniversalRoom extends Interactable {
 
   onEnter() {
 
+    //CONDITIONALS FOR SOUNDFX IF CALLED IN A ROOM//
     for (let i = 0; i < this.roomObjects.length; i++){
       this.roomObjects[i].x -= this.backgroundX;
       this.roomObjects[i].y -= this.backgroundY;

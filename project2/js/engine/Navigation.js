@@ -19,7 +19,6 @@ class Navigation extends Interactable {
   //TARGETING SHAPE//
   draw() {
     push();
-    // fill(255,100);
     noFill();
     noStroke();
     rect(this.x,this.y,this.width,this.height);

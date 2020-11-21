@@ -5,7 +5,7 @@ MADELINE ZAYTSOFF
 A POINT AND CLICK HORROR ADVENTURE
 **************************************************/
 //GLOBAL VARIABLE FOR MENU NAVIGATION//
-let menu = 'clickToStart';
+let menu = 'basementdoor';
 let menuOnEnter;
 
 //OBJ NAMES//
@@ -16,6 +16,8 @@ let kitchenRoomScene;
 let diningRoomScene;
 let frontHallScene;
 let basementDoorScene;
+let upstairsScene;
+let bedroomScene;
 let introVideoSpecs;
 let userNotepadOBJ;
 let fullScreenScareOBJ;
@@ -35,7 +37,10 @@ let livingRoomBKG;
 let kitchenBKG;
 let diningRoomBKG;
 let frontHallBKG;
+let bedroomBKG;
 let basementEntranceBKG;
+let basementEntranceOpenBKG;
+let upstairsBKG;
 let interactWheelOverlay;
 let touchIconOverlay;
 let sightIconOverlay;
@@ -52,7 +57,6 @@ let fullScreenHead;
 let fullScreenLeftHand;
 let fullScreenRightHand;
 let fullScreenShoulders;
-let basementEntranceOpenBKG;
 
 //SOUND PRELOAD NAMES//
 let logoSound;
@@ -62,6 +66,7 @@ let clockSound;
 let runCarpetSound;
 let leaveRustleSound;
 let heartbeatSound;
+let unlockSound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -105,6 +110,10 @@ let dsImageSpec = {
   offsetX: -250,
   offsetY: 0
 }
+let fadeOutScreen = {
+  alpha: 0,
+  speed: 5
+}
 
 //TEXT GENERATOR TITLES//
 let description;
@@ -128,6 +137,10 @@ let introLogoSpec = {
 
 //BORDER CONTROL//
 let borderActive = true;
+
+//PATH CHANGE AFTER OBTAINING KEY//
+let haveKey = false;
+let fadeOutUnlock = false;
 
 //CLICK START SCREEN; BEGINNING OF GAME//
 function clickToStartFunction() {
@@ -160,6 +173,28 @@ function blackBorder() {
   image(blackBorderOverlay, 0, 0);
 }
 
+//FADEOUT TRANSITION AFTER UNLOCKING DOOR//
+function fadeToBlack() {
+
+  time = time + deltaTime;
+
+  if (time <= 2000){
+    push();
+    fill(0,fadeOutScreen.alpha);
+    rect(0,0,width,height);
+    pop();
+  }else if (time <= 4000){
+    fadeOutScreen.alpha = fadeOutScreen.alpha + fadeOutScreen.speed;
+
+    push();
+    fill(0,fadeOutScreen.alpha);
+    rect(0,0,width,height);
+    pop();
+  } else {
+    goToMenu('finalScene');
+  }
+}
+
 //TIMING CONTROLS AND SOUND TRIGGER FOR OPENING LOGO//
 function introLogo() {
 
@@ -180,7 +215,6 @@ function introLogo() {
   }
 
   logoIntro.drawIntro(ratio * 255);
-
 }
 
 //START SCREEN COMPONENTS//
@@ -239,6 +273,24 @@ function basementDoorFunction() {
   basementDoorScene.draw();
 }
 
+//UPSTAIRS COMPONENTS//
+function upstairsFunction() {
+  upstairsScene.run();
+  upstairsScene.draw();
+}
+
+//UPSTAIRS COMPONENTS//
+function bedroomFunction() {
+  bedroomScene.run();
+  bedroomScene.draw();
+}
+
+//UPSTAIRS COMPONENTS//
+function finalSceneFunction() {
+  fullScreenScareOBJ.run();
+  fullScreenScareOBJ.draw();
+}
+
 //MENU NAVIGATION TREE//
 function menuNav() {
 
@@ -281,13 +333,25 @@ function menuNav() {
   if (menu == 'basementdoor') {
     basementDoorFunction();
   }
+
+  if (menu == 'upstairs') {
+    upstairsFunction();
+  }
+
+  if (menu == 'bedroom') {
+    bedroomFunction();
+  }
+
+  if (menu == 'finalScene') {
+    finalSceneFunction();
+  }
 }
 
 //FULL SCREEN SCARE//
-// function fullScreenScare() {
-//   fullScreenScareOBJ.run();
-//   fullScreenScareOBJ.draw();
-// }
+function fullScreenScare() {
+  fullScreenScareOBJ.run();
+  fullScreenScareOBJ.draw();
+}
 
 //DYNAMIC SHADOW GENERATOR//
 function textDynamicShadow(writing, size, xmin, xmax, ymin, ymax) {
@@ -403,6 +467,10 @@ function goToMenu(menuID) {
     diningRoomScene.onExit();
   } else if (menu == 'basementdoor') {
     basementDoorScene.onExit();
+  } else if (menu == 'upstairs') {
+      upstairsScene.onExit();
+  } else if (menu == 'upstairs') {
+      bedroomScene.onExit();
   }
 
   //STANDARD MENU NAVIGATION//
@@ -419,6 +487,10 @@ function goToMenu(menuID) {
     diningRoomScene.onEnter();
   } else if (menu == 'basementdoor') {
     basementDoorScene.onEnter();
+  } else if (menu == 'upstairs') {
+      upstairsScene.onEnter();
+  } else if (menu == 'upstairs') {
+      bedroomScene.onEnter();
   }
 }
 
@@ -528,43 +600,71 @@ function mouseClicked() {
     }
   }
 
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR UPSTAIRS//
+  else if (menu == 'upstairs') {
+    if (upstairsScene.processMouseEvent()) {
+      return;
+    }
+  }
+
+  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR UPSTAIRS//
+  else if (menu == 'bedroom') {
+    if (bedroomScene.processMouseEvent()) {
+      return;
+    }
+  }
+
   haveInteractWheel = false;
 }
 
 //HIGHLIGHTS INTERACTABLES BY CHANGING MOUSE COLOR//
 function mouseMoved() {
 
-  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR LIVING ROOM//
+  //ACTIVATES INTERACTABLE DETECTION FOR LIVING ROOM//
   if (menu == 'livingroom') {
     if (livingRoomScene.processMouseMove()) {
       return;
     }
   }
 
-  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR FRONT HALL//
+  //ACTIVATES INTERACTABLE DETECTION FOR FRONT HALL//
   else if (menu == 'fronthall') {
     if (frontHallScene.processMouseMove()) {
       return;
     }
   }
 
-  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR DINING ROOM//
+  //ACTIVATES INTERACTABLE DETECTION FOR DINING ROOM//
   else if (menu == 'diningroom') {
     if (diningRoomScene.processMouseMove()) {
       return;
     }
   }
 
-  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR KITCHEN//
+  //ACTIVATES INTERACTABLE DETECTION FOR KITCHEN//
   else if (menu == 'kitchen') {
     if (kitchenRoomScene.processMouseMove()) {
       return;
     }
   }
 
-  //ACTIVATES NAVIGATION WHEEL AND INTERACTABLAES FOR KITCHEN//
+  //ACTIVATES INTERACTABLE DETECTION FOR KITCHEN//
   else if (menu == 'basementdoor') {
     if (basementDoorScene.processMouseMove()) {
+      return;
+    }
+  }
+
+  //ACTIVATES INTERACTABLE DETECTION FOR UPSTAIRS//
+  else if (menu == 'upstairs') {
+    if (upstairsScene.processMouseMove()) {
+      return;
+    }
+  }
+
+  //ACTIVATES INTERACTABLE DETECTION FOR BEDROOM//
+  else if (menu == 'bedroom') {
+    if (bedroomScene.processMouseMove()) {
       return;
     }
   }
@@ -588,6 +688,8 @@ function preload() {
   kitchenBKG = loadImage('assets/images/rooms/Kitchen/kitchenBKG.png');
   diningRoomBKG = loadImage('assets/images/rooms/Dining Room/diningRoomBKG.png');
   frontHallBKG = loadImage('assets/images/rooms/Front Hall/fronthallBKG.png');
+  upstairsBKG = loadImage('assets/images/rooms/Upstairs/upstairsBKG.png');
+  bedroomBKG = loadImage('assets/images/rooms/Bedroom/bedroomBKG.png');
   basementEntranceBKG = loadImage('assets/images/rooms/BasementDoor/basementDoor.png');
   basementEntranceOpenBKG = loadImage('assets/images/rooms/BasementDoor/basementDoorOpen.png');
 
@@ -622,6 +724,7 @@ function preload() {
   runCarpetSound = loadSound('assets/sounds/runCarpet.mp3');
   leaveRustleSound = loadSound('assets/sounds/leaveRustle.mp3');
   heartbeatSound = loadSound('assets/sounds/heartbeat.mp3');
+  unlockSound = loadSound('assets/sounds/unlock.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');
@@ -635,15 +738,19 @@ function setup() {
 
   createCanvas(canvasSize.x, canvasSize.y);
 
+  logoIntro = new LogoOBJ();
   startScreen = new StartScreenObj(0, 0);
   howToScreen = new HowToScreen();
+
   livingRoomScene = new LivingRoom();
   kitchenRoomScene = new Kitchen();
   diningRoomScene = new DiningRoom();
   frontHallScene = new FrontHall();
   basementDoorScene = new BasementDoor();
-  logoIntro = new LogoOBJ();
-  // fullScreenScareOBJ = new FullScreenScare();
+  upstairsScene = new Upstairs();
+  bedroomScene = new Bedroom();
+
+  fullScreenScareOBJ = new FullScreenScare();
 
   cursor('assets/images/cursorIconOverlay.png');
 
@@ -659,7 +766,9 @@ function draw() {
 
   menuNav();
 
-
+  if (fadeOutUnlock){
+    fadeToBlack();
+  }
 
   if (borderActive) {
     blackBorder();

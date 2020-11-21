@@ -28,6 +28,7 @@ class FullScreenScare {
     this.blackout = false;
     this.backgroundX = 0;
     this.backgroundY = 0;
+    this.time = 0;
   }
 
   run() {
@@ -51,23 +52,24 @@ class FullScreenScare {
     //BLACKOUT OF SCREEN//
     if (this.state == 'stage2') {
 
-      time += deltaTime;
+      this.time += deltaTime;
 
-      if (time >= 0) {
+      if (this.time >= 0) {
         this.blackout = true;
       }
 
-      if (time >= 100) {
+      if (this.time >= 100) {
         this.blackout = false;
       }
 
-      if (time >= 4950) {
+      if (this.time >= 4950) {
         this.blackout = true;
       }
 
-      if (time >= 5000) {
+      if (this.time >= 5000) {
         this.blackout = false;
         this.state = 'stage3';
+        this.time = 0;
         borderActive = false;
       }
     }
@@ -75,77 +77,81 @@ class FullScreenScare {
     //FULL MOVEMENT OF HEAD, HANDS, AND CHEST//
     if (this.state == 'stage3') {
 
-      //SHAKE EFFECT FOR BACKGROUND//
-      this.backgroundX = this.backgroundX + random(-10,10);
-      this.backgroundX = constrain(this.backgroundX,-100,0);
+        this.time += deltaTime;
 
-      this.backgroundY = this.backgroundY + random(-10,10);
-      this.backgroundY = constrain(this.backgroundY,-100,0);
+        //SHAKE EFFECT FOR BACKGROUND//
+        this.backgroundX = this.backgroundX + random(-10,10);
+        this.backgroundX = constrain(this.backgroundX,-100,0);
 
-      //RIGHT HAND MOVEMENT//
-      if (this.xrh <= 160) {
-        this.xrh = this.xrh + this.rhspeed;
+        this.backgroundY = this.backgroundY + random(-10,10);
+        this.backgroundY = constrain(this.backgroundY,-100,0);
+
+        //RIGHT HAND MOVEMENT//
+        if (this.xrh <= 160) {
+          this.xrh = this.xrh + this.rhspeed;
+        }
+
+        //LEFT HAND MOVEMENT//
+        if (this.xlh >= 210) {
+          this.xlh = this.xlh + -this.lhspeed;
+        }
+
+        if (this.ylh >= 150) {
+          this.ylh = this.ylh + -this.lhspeedy;
+        }
+
+        //SHOULDER MOVEMENT//
+        if (this.ys >= 440) {
+          this.ys = this.ys + -this.shoulderSpeed;
+        }
+
+        if (this.xs >= 150) {
+          this.xs = this.xs + -this.shoulderSpeed;
+        }
+
+        //HEAD MOVEMENT//
+        if (this.xh >= 260) {
+          this.xh = this.xh + -this.headSpeed;
+        }
+
+        if (this.yh >= 15) {
+          this.yh = this.yh + -this.headSpeed2;
+        }
+
+        //HEAD SIZE GROWTH//
+        if (this.headSizeW <= 495) {
+          this.headSizeW = this.headSizeW + this.headSpeed;
+        }
+
+        if (this.headSizeH <= 555) {
+          this.headSizeH = this.headSizeH + this.headSpeed;
+        }
+
+        //SHOULDER SIZE GROWTH//
+        if (this.shoulderSizeW <= 785) {
+          this.shoulderSizeW = this.shoulderSizeW + this.shoulderSpeed;
+        }
+
+        if (this.headSizeH <= 357) {
+          this.shoulderSizeH = this.shoulderSizeH + this.shoulderSpeed;
+        }
+
+        //LOOPS GAME BACK TO BEGINNING//
+        if (this.time >= 1500){
+          console.log('its time');
+          borderActive = true;
+          haveKey = false;
+          fadeOutUnlock = false;
+
+          goToMenu('start');
+        }
       }
-
-      //LEFT HAND MOVEMENT//
-      if (this.xlh >= 210) {
-        this.xlh = this.xlh + -this.lhspeed;
-      }
-
-      if (this.ylh >= 150) {
-        this.ylh = this.ylh + -this.lhspeedy;
-      }
-
-      //SHOULDER MOVEMENT//
-      if (this.ys >= 440) {
-        this.ys = this.ys + -this.shoulderSpeed;
-      }
-
-      if (this.xs >= 150) {
-        this.xs = this.xs + -this.shoulderSpeed;
-      }
-
-      //HEAD MOVEMENT//
-      if (this.xh >= 260) {
-        this.xh = this.xh + -this.headSpeed;
-      }
-
-      if (this.yh >= 15) {
-        this.yh = this.yh + -this.headSpeed2;
-      }
-
-      //HEAD SIZE GROWTH//
-      if (this.headSizeW <= 495) {
-        this.headSizeW = this.headSizeW + this.headSpeed;
-      }
-
-      if (this.headSizeH <= 555) {
-        this.headSizeH = this.headSizeH + this.headSpeed;
-      }
-
-      //SHOULDER SIZE GROWTH//
-      if (this.shoulderSizeW <= 785) {
-        this.shoulderSizeW = this.shoulderSizeW + this.shoulderSpeed;
-      }
-
-      if (this.headSizeH <= 357) {
-        this.shoulderSizeH = this.shoulderSizeH + this.shoulderSpeed;
-      }
-
-      //CONTAINS INSTRUCTIONS TO ZOOM INTO THE BASEMENT AND RESET THE GAME//
-      }
-
-      // else if (this.state == 'stage4') {}
-
-
-
-  }
+    }
 
   draw() {
 
     //CONTAINS HAND IMAGES//
     if (this.state == 'stage1') {
-
       image(basementEntranceBKG,this.backgroundX,this.backgroundY);
 
       push();
@@ -170,7 +176,7 @@ class FullScreenScare {
       } else return;
 
     //CONTAINS VISUALS HEAD, HANDS, AND TORSO AS WELL AS BACKGROUND//
-    } else if (this.state == 'stage3') {}
+    } else if (this.state == 'stage3') {
 
       push();
       fill(0);
@@ -207,5 +213,6 @@ class FullScreenScare {
       rotate(350);
       image(fullScreenRightHand, this.xrh, this.yrh);
       pop();
-    } 
+    }
+  }
 }
