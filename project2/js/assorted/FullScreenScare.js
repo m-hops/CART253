@@ -24,17 +24,33 @@ class FullScreenScare {
     this.headSpeed = 2.5;
     this.headSpeed2 = 4.3;
     this.shoulderSpeed = 2;
-    this.state = 'stage1';
+    this.state = 'stage0';
     this.blackout = false;
     this.backgroundX = 0;
     this.backgroundY = 0;
     this.time = 0;
   }
 
+  goToState(state) {
+
+    this.state = state;
+
+    if (this.state == 'stage1'){
+      bigScare1Music.play();
+    } else if (this.state == 'stage2'){
+      bigScare1Music.stop();
+    }
+
+  }
+
   run() {
+
+    //DISABLED CURSOR TO AVOID ACCIDENTAL INPUT DURING SCENE//
+    noCursor();
 
     //INITIAL MOVEMENT COMMANDS FOR HANDS//
     if (this.state == 'stage1') {
+
       this.x = this.x + random(-1, 1);
 
       this.backgroundX = this.backgroundX + random(-1,1);
@@ -45,7 +61,7 @@ class FullScreenScare {
       } else if (this.y <= 300 && this.y >= 0) {
         this.y = this.y + this.speed2;
       } else if (this.y <= 0) {
-        this.state = 'stage2';
+        this.goToState('stage2');
       }
     }
 
@@ -68,7 +84,7 @@ class FullScreenScare {
 
       if (this.time >= 5000) {
         this.blackout = false;
-        this.state = 'stage3';
+        this.goToState('stage3')
         this.time = 0;
         borderActive = false;
       }
@@ -138,12 +154,48 @@ class FullScreenScare {
 
         //LOOPS GAME BACK TO BEGINNING//
         if (this.time >= 1500){
-          console.log('its time');
+
+          //RESET CERTAIN PARAMETERS//
           borderActive = true;
           haveKey = false;
           fadeOutUnlock = false;
 
+          fadeOutScreen.alpha = 0;
+
+          //RESET ANIMATED SCENE BACK TO DEFAULT STATE//
+          this.x = -230;
+          this.xh = 360;
+          this.xlh = 250;
+          this.xrh = 50;
+          this.xs = 230;
+          this.y = 600;
+          this.yh = 200;
+          this.ylh = 500;
+          this.yrh = 530;
+          this.ys = 500;
+          this.speed1 = -1;
+          this.speed2 = -10;
+          this.rhspeed = 3;
+          this.lhspeed = 1;
+          this.lhspeedy = 10;
+          this.lhrotation = 357;
+          this.headSizeW = 400;
+          this.headSizeH = 461;
+          this.shoulderSizeW = 710;
+          this.shoulderSizeH = 323;
+          this.headSpeed = 2.5;
+          this.headSpeed2 = 4.3;
+          this.shoulderSpeed = 2;
+          this.state = 'stage0';
+          this.blackout = false;
+          this.backgroundX = 0;
+          this.backgroundY = 0;
+          this.time = 0;
+
           goToMenu('start');
+
+          //RE-ENABLE CURSOR//
+          cursor('assets/images/cursorIconOverlay.png');
         }
       }
     }

@@ -27,6 +27,7 @@ class Key extends WheelObject {
     //CONDITIONALS SETUP FOR ONCE THE KEY IS ACQUIRED//
     if (haveKey == false) {
       console.log('touchHit');
+      keySound.play();
       descriptionSet('You open the drawer and find a small key\ncovered in dried blood.\nYou pocket the key.')
       haveKey = true;
     } else {
@@ -43,7 +44,7 @@ class Key extends WheelObject {
   draw(){
     push();
     noFill();
-    // noStroke();
+    noStroke();
     rect(this.x,this.y,this.width,this.height);
     pop();
   }

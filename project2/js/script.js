@@ -62,11 +62,13 @@ let fullScreenShoulders;
 let logoSound;
 let startMusic;
 let droneMusic;
+let bigScare1Music;
 let clockSound;
 let runCarpetSound;
 let leaveRustleSound;
 let heartbeatSound;
 let unlockSound;
+let keySound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -192,6 +194,7 @@ function fadeToBlack() {
     pop();
   } else {
     goToMenu('finalScene');
+    fadeOutUnlock = false;
   }
 }
 
@@ -226,6 +229,8 @@ function startScreenFunction() {
   startScreen.titleText();
 
   startScreen.menuText();
+
+  fadeOutUnlock = false;
 }
 
 //HOW TO SCREEN 1 COMPONENTS//
@@ -285,7 +290,7 @@ function bedroomFunction() {
   bedroomScene.draw();
 }
 
-//UPSTAIRS COMPONENTS//
+//FULL SCREEN FINAL SCENE//
 function finalSceneFunction() {
   fullScreenScareOBJ.run();
   fullScreenScareOBJ.draw();
@@ -345,12 +350,6 @@ function menuNav() {
   if (menu == 'finalScene') {
     finalSceneFunction();
   }
-}
-
-//FULL SCREEN SCARE//
-function fullScreenScare() {
-  fullScreenScareOBJ.run();
-  fullScreenScareOBJ.draw();
 }
 
 //DYNAMIC SHADOW GENERATOR//
@@ -491,6 +490,8 @@ function goToMenu(menuID) {
       upstairsScene.onEnter();
   } else if (menu == 'upstairs') {
       bedroomScene.onEnter();
+  } else if (menu == 'finalScene') {
+    fullScreenScareOBJ.goToState('stage1');
   }
 }
 
@@ -725,10 +726,12 @@ function preload() {
   leaveRustleSound = loadSound('assets/sounds/leaveRustle.mp3');
   heartbeatSound = loadSound('assets/sounds/heartbeat.mp3');
   unlockSound = loadSound('assets/sounds/unlock.mp3');
+  keySound = loadSound('assets/sounds/keyTone.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');
   droneMusic = loadSound('assets/sounds/droneTone.mp3');
+  bigScare1Music = loadSound('assets/sounds/bigScareAmbience.mp3');
 }
 
 //ONE TIME CALLS//
@@ -738,6 +741,7 @@ function setup() {
 
   createCanvas(canvasSize.x, canvasSize.y);
 
+  //LINKING CLASSES/
   logoIntro = new LogoOBJ();
   startScreen = new StartScreenObj(0, 0);
   howToScreen = new HowToScreen();
@@ -752,16 +756,20 @@ function setup() {
 
   fullScreenScareOBJ = new FullScreenScare();
 
+  //ACTIVATE CUSTOM CURSOR//
   cursor('assets/images/cursorIconOverlay.png');
 
+  //ENABLE MUSIC NOT TO RUN DURING DRAW//
   toggleMusic();
 }
 
 //EVERY FRAME CALLS//
 function draw() {
 
+  //USED TO ACTIVATE INTERACT WHEEL//
   interactWheelMotion();
 
+  //STANDARD BACKGROUND FILL//
   background(bkgColor.color.r, bkgColor.color.g, bkgColor.color.b);
 
   menuNav();
@@ -770,6 +778,7 @@ function draw() {
     fadeToBlack();
   }
 
+  //TURNS OFF OUTER BORDER WHEN REQUIRED//
   if (borderActive) {
     blackBorder();
   } else return;
