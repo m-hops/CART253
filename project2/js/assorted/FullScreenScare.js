@@ -159,6 +159,7 @@ class FullScreenScare {
           borderActive = true;
           haveKey = false;
           fadeOutUnlock = false;
+          activeScratch = true;
 
           fadeOutScreen.alpha = 0;
 

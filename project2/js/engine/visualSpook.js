@@ -1,6 +1,6 @@
 class VisualSpook extends Interactable {
 
-  constructor(x,y,w,h,image,hostRoom,td,speed,alpha,alphaSpeed,sound) {
+  constructor(x,y,w,h,image,hostRoom,td,speed,alpha,alphaSpeed,soundVolume,sound) {
     super(x,y,w,h);
     this.image = image;
     this.hostRoom = hostRoom;
@@ -13,6 +13,7 @@ class VisualSpook extends Interactable {
     this.originalY = y;
     this.originalAlpha = alpha;
     this.sound = sound;
+    this.volume = soundVolume;
   }
 
   onClick(){
@@ -27,6 +28,8 @@ class VisualSpook extends Interactable {
       let distanceToCam = abs(this.x - cameraX);
 
       if (distanceToCam < this.triggerDistance) {
+
+        this.sound.setVolume(this.volume);
         this.sound.play();
         this.state = 'move';
       }
@@ -39,9 +42,10 @@ class VisualSpook extends Interactable {
   }
 
   onEnter(){
-    let chance = random(0,1);
 
-    if (chance < 0.5){
+    let odds = random(0,1);
+
+    if (odds < 0.5){
       this.x = this.originalX;
       this.y = this.originalY;
       this.alpha = this.originalAlpha;
@@ -53,9 +57,9 @@ class VisualSpook extends Interactable {
 
     if (this.state != 'no'){
       push();
-      // fill(255,100);
-      noFill();
-      noStroke();
+      fill(255,100);
+      // noFill();
+      // noStroke();
       tint(255,this.alpha);
       image(this.image,this.x,this.y);
       pop();

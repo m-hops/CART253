@@ -38,6 +38,7 @@ let kitchenBKG;
 let diningRoomBKG;
 let frontHallBKG;
 let bedroomBKG;
+let bedroomScratchBKG;
 let basementEntranceBKG;
 let basementEntranceOpenBKG;
 let upstairsBKG;
@@ -57,11 +58,14 @@ let fullScreenHead;
 let fullScreenLeftHand;
 let fullScreenRightHand;
 let fullScreenShoulders;
+let keyImage;
+let scratchesImage;
 
 //SOUND PRELOAD NAMES//
 let logoSound;
 let startMusic;
 let droneMusic;
+let ambientMusic;
 let bigScare1Music;
 let clockSound;
 let runCarpetSound;
@@ -69,6 +73,7 @@ let leaveRustleSound;
 let heartbeatSound;
 let unlockSound;
 let keySound;
+let scratchSound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -143,6 +148,7 @@ let borderActive = true;
 //PATH CHANGE AFTER OBTAINING KEY//
 let haveKey = false;
 let fadeOutUnlock = false;
+let activeScratch = false;
 
 //CLICK START SCREEN; BEGINNING OF GAME//
 function clickToStartFunction() {
@@ -468,7 +474,7 @@ function goToMenu(menuID) {
     basementDoorScene.onExit();
   } else if (menu == 'upstairs') {
       upstairsScene.onExit();
-  } else if (menu == 'upstairs') {
+  } else if (menu == 'bedroom') {
       bedroomScene.onExit();
   }
 
@@ -488,7 +494,7 @@ function goToMenu(menuID) {
     basementDoorScene.onEnter();
   } else if (menu == 'upstairs') {
       upstairsScene.onEnter();
-  } else if (menu == 'upstairs') {
+  } else if (menu == 'bedroom') {
       bedroomScene.onEnter();
   } else if (menu == 'finalScene') {
     fullScreenScareOBJ.goToState('stage1');
@@ -509,6 +515,15 @@ function toggleMusic() {
   } else if (!startMusic.isPlaying()) {
     startMusic.setVolume(0.3);
     startMusic.loop();
+  }
+
+  if (musicOption == false) {
+    ambientMusic.stop();
+  } else if (menu == 'start' || menu == 'howto1' || menu == 'howto2' || menu == 'finalScene' || menu == 'clickToStart' || menu == 'introduction'){
+    ambientMusic.stop();
+  } else if (!ambientMusic.isPlaying()){
+    ambientMusic.setVolume(0.3);
+    ambientMusic.loop();
   }
 }
 
@@ -691,6 +706,7 @@ function preload() {
   frontHallBKG = loadImage('assets/images/rooms/Front Hall/fronthallBKG.png');
   upstairsBKG = loadImage('assets/images/rooms/Upstairs/upstairsBKG.png');
   bedroomBKG = loadImage('assets/images/rooms/Bedroom/bedroomBKG.png');
+  bedroomScratchBKG = loadImage('assets/images/rooms/Bedroom/bedroomBKGScratch.png');
   basementEntranceBKG = loadImage('assets/images/rooms/BasementDoor/basementDoor.png');
   basementEntranceOpenBKG = loadImage('assets/images/rooms/BasementDoor/basementDoorOpen.png');
 
@@ -712,6 +728,8 @@ function preload() {
   blankBKG = loadImage('assets/images/blankBKG.png');
   fullScreenHands = loadImage('assets/images/openHands.png');
   television = loadImage('assets/images/rooms/Living Room/tv.png');
+  keyImage = loadImage('assets/images/rooms/Bedroom/Key.png');
+  scratchesImage = loadImage('assets/images/rooms/Bedroom/scratches.png');
 
   //FULL SCREEN SCARE//
   fullScreenHead = loadImage('assets/images/bigScare/head.png');
@@ -727,10 +745,12 @@ function preload() {
   heartbeatSound = loadSound('assets/sounds/heartbeat.mp3');
   unlockSound = loadSound('assets/sounds/unlock.mp3');
   keySound = loadSound('assets/sounds/keyTone.mp3');
+  scratchSound = loadSound('assets/sounds/scratch.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');
   droneMusic = loadSound('assets/sounds/droneTone.mp3');
+  ambientMusic = loadSound('assets/sounds/houseAmbient.mp3');
   bigScare1Music = loadSound('assets/sounds/bigScareAmbience.mp3');
 }
 

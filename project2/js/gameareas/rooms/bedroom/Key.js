@@ -28,8 +28,11 @@ class Key extends WheelObject {
     if (haveKey == false) {
       console.log('touchHit');
       keySound.play();
-      descriptionSet('You open the drawer and find a small key\ncovered in dried blood.\nYou pocket the key.')
+      scratchSound.pan(-1.0);
+      scratchSound.play();
+      descriptionImageSet('You open the drawer and find a small key\ncovered in dried blood.\nYou pocket the key.',keyImage);
       haveKey = true;
+      activeScratch = true;
     } else {
       descriptionSet('The drawer is empty.')
     }
