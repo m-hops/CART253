@@ -40,6 +40,7 @@ let frontHallBKG;
 let bedroomBKG;
 let bedroomScratchBKG;
 let basementEntranceBKG;
+let basementEntranceNoNavBKG;
 let basementEntranceOpenBKG;
 let upstairsBKG;
 let interactWheelOverlay;
@@ -60,13 +61,15 @@ let fullScreenRightHand;
 let fullScreenShoulders;
 let keyImage;
 let scratchesImage;
+let countBlank;
+let count3;
+let count2;
 
 //SOUND PRELOAD NAMES//
-let logoSound;
 let startMusic;
 let droneMusic;
 let ambientMusic;
-let bigScare1Music;
+let bigScareFinalSound;
 let clockSound;
 let runCarpetSound;
 let leaveRustleSound;
@@ -74,6 +77,12 @@ let heartbeatSound;
 let unlockSound;
 let keySound;
 let scratchSound;
+let logoSound;
+let finalVO1Sound;
+let finalVO2Sound;
+let dripSound;
+let vinylSound;
+let countSound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -522,7 +531,7 @@ function toggleMusic() {
   } else if (menu == 'start' || menu == 'howto1' || menu == 'howto2' || menu == 'finalScene' || menu == 'clickToStart' || menu == 'introduction'){
     ambientMusic.stop();
   } else if (!ambientMusic.isPlaying()){
-    ambientMusic.setVolume(0.3);
+    ambientMusic.setVolume(0.2);
     ambientMusic.loop();
   }
 }
@@ -709,6 +718,7 @@ function preload() {
   bedroomScratchBKG = loadImage('assets/images/rooms/Bedroom/bedroomBKGScratch.png');
   basementEntranceBKG = loadImage('assets/images/rooms/BasementDoor/basementDoor.png');
   basementEntranceOpenBKG = loadImage('assets/images/rooms/BasementDoor/basementDoorOpen.png');
+  basementEntranceNoNavBKG = loadImage('assets/images/rooms/BasementDoor/basementDoorNoNav.png');
 
   //LEVEL ASSETS//
   shadowMirrorFrontHall = loadImage('assets/images/rooms/Front Hall/shadowMirror.png');
@@ -730,6 +740,9 @@ function preload() {
   television = loadImage('assets/images/rooms/Living Room/tv.png');
   keyImage = loadImage('assets/images/rooms/Bedroom/Key.png');
   scratchesImage = loadImage('assets/images/rooms/Bedroom/scratches.png');
+  countBlank = loadImage('assets/images/countdown/blank.png');
+  count2 = loadImage('assets/images/countdown/2.png');
+  count3 = loadImage('assets/images/countdown/3.png');
 
   //FULL SCREEN SCARE//
   fullScreenHead = loadImage('assets/images/bigScare/head.png');
@@ -746,12 +759,17 @@ function preload() {
   unlockSound = loadSound('assets/sounds/unlock.mp3');
   keySound = loadSound('assets/sounds/keyTone.mp3');
   scratchSound = loadSound('assets/sounds/scratch.mp3');
+  finalVO1Sound = loadSound('assets/sounds/finalVO1.mp3');
+  finalVO2Sound = loadSound('assets/sounds/finalVO2.mp3');
+  dripSound = loadSound('assets/sounds/drip.mp3');
+  bigScareFinalSound = loadSound('assets/sounds/bigScareAmbience.mp3');
+  countSound = loadSound('assets/sounds/countdownSound.mp3');
+  vinylSound = loadSound('assets/sounds/vinylCrackle.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');
   droneMusic = loadSound('assets/sounds/droneTone.mp3');
   ambientMusic = loadSound('assets/sounds/houseAmbient.mp3');
-  bigScare1Music = loadSound('assets/sounds/bigScareAmbience.mp3');
 }
 
 //ONE TIME CALLS//
