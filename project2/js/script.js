@@ -28,6 +28,7 @@ let glitchFont;
 let glitchFontBold;
 
 //IMAGE PRELOAD NAMES//
+let mBlock;
 let blankBKG;
 let logo;
 let startScreenBKG;
@@ -64,6 +65,8 @@ let scratchesImage;
 let countBlank;
 let count3;
 let count2;
+let countOverlay;
+let filmScratch;
 
 //SOUND PRELOAD NAMES//
 let startMusic;
@@ -83,6 +86,7 @@ let finalVO2Sound;
 let dripSound;
 let vinylSound;
 let countSound;
+let doorSlamSound;
 
 //DEFAULT STATE FOR INTERACT WHEEL//
 let haveInteractWheel = false;
@@ -708,7 +712,7 @@ function preload() {
   //LEVEL BACKGROUNDS//
   startScreenBKG = loadImage('assets/images/startScreen/startScreenBKG.png');
   howTo1 = loadImage('assets/images/howToScreen/howTo1.png');
-  howTo2 = loadImage('assets/images/howToScreen/howTo2.png');
+  howTo2 = loadImage('assets/images/howToScreen/howTo3.png');
   livingRoomBKG = loadImage('assets/images/rooms/Living Room/livingRoom.png');
   kitchenBKG = loadImage('assets/images/rooms/Kitchen/kitchenBKG.png');
   diningRoomBKG = loadImage('assets/images/rooms/Dining Room/diningRoomBKG.png');
@@ -743,6 +747,8 @@ function preload() {
   countBlank = loadImage('assets/images/countdown/blank.png');
   count2 = loadImage('assets/images/countdown/2.png');
   count3 = loadImage('assets/images/countdown/3.png');
+  countOverlay = loadImage('assets/images/countdown/countdownOverlay.png');
+  filmScratch = loadImage('assets/images/countdown/film.png');
 
   //FULL SCREEN SCARE//
   fullScreenHead = loadImage('assets/images/bigScare/head.png');
@@ -765,11 +771,15 @@ function preload() {
   bigScareFinalSound = loadSound('assets/sounds/bigScareAmbience.mp3');
   countSound = loadSound('assets/sounds/countdownSound.mp3');
   vinylSound = loadSound('assets/sounds/vinylCrackle.mp3');
+  doorSlamSound = loadSound('assets/sounds/doorSlam.mp3');
 
   //MUSIC//
   startMusic = loadSound('assets/sounds/startMenu.mp3');
   droneMusic = loadSound('assets/sounds/droneTone.mp3');
   ambientMusic = loadSound('assets/sounds/houseAmbient.mp3');
+
+  //SHAPE FOR MEASURING OBJECT POSITION (FOR FOR USE IN FINAL GAME)//
+  mBlock = loadImage('assets/images/measureBlock.png');
 }
 
 //ONE TIME CALLS//

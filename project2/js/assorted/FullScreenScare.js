@@ -32,8 +32,11 @@ class FullScreenScare {
     this.alphaB = 0;
     this.alpha3 = 0;
     this.alpha2 = 0;
+    this.alphaF = 0;
     this.countOffsetX = -200;
     this.countOffsetY = 0;
+    this.filmOffsetY = 0;
+    this.filmOffsetX = -200;
     this.countSpeed = 255;
   }
 
@@ -195,11 +198,20 @@ class FullScreenScare {
       this.countOffsetY = this.countOffsetY + random(-30, 30);
       this.countOffsetY = constrain(this.countOffsetY, -100, 0);
 
+      this.filmOffsetY = this.filmOffsetY + random(-2,2);
+      this.filmOffsetY = constrain(this.filmOffsetY, -5, 5);
+
+      this.filmOffsetX = this.filmOffsetX + random(-30,30);
+      this.filmOffsetX = constrain(this.filmOffsetX, -300, 100);
+
+      //TIMING FOR FILM OUTRO IMAGES//
       if (this.time < 1000) {
 
-        //NO EFFECT//
+        this.alphaF = this.countSpeed;
 
       } else if (this.time < 2000) {
+
+        this.alphaF = 0;
 
         this.alphaB = this.countSpeed;
 
@@ -213,11 +225,17 @@ class FullScreenScare {
 
         this.alpha3 = 0;
 
+        this.alphaF = this.countSpeed;
+
       } else if (this.time <= 4000) {
+
+        this.alphaF = 0;
 
         this.alpha2 = this.countSpeed;
 
       } else if (this.time <= 4500) {
+
+        this.alphaF = this.countSpeed;
 
         this.alpha2 = 0;
 
@@ -227,7 +245,7 @@ class FullScreenScare {
         borderActive = true;
         haveKey = false;
         fadeOutUnlock = false;
-        activeScratch = true;
+        activeScratch = false;
 
         fadeOutScreen.alpha = 0;
 
@@ -244,22 +262,31 @@ class FullScreenScare {
         this.ys = 500;
         this.speed1 = -1;
         this.speed2 = -10;
-        this.rhspeed = 3;
-        this.lhspeed = 1;
-        this.lhspeedy = 10;
+        this.rhspeed = 4;
+        this.lhspeed = 2;
+        this.lhspeedy = 12;
         this.lhrotation = 357;
         this.headSizeW = 400;
         this.headSizeH = 461;
         this.shoulderSizeW = 710;
         this.shoulderSizeH = 323;
-        this.headSpeed = 2.5;
-        this.headSpeed2 = 4.3;
-        this.shoulderSpeed = 2;
+        this.headSpeed = 3.5;
+        this.headSpeed2 = 5.3;
+        this.shoulderSpeed = 3;
         this.state = 'stage0';
         this.blackout = false;
         this.backgroundX = 0;
         this.backgroundY = 0;
         this.time = 0;
+        this.alphaB = 0;
+        this.alpha3 = 0;
+        this.alpha2 = 0;
+        this.alphaF = 0;
+        this.countOffsetX = -200;
+        this.countOffsetY = 0;
+        this.filmOffsetY = 0;
+        this.filmOffsetX = -200;
+        this.countSpeed = 255;
 
         goToMenu('start');
 
@@ -340,6 +367,11 @@ class FullScreenScare {
     } else if (this.state == 'stage4') {
 
       push();
+      tint(255, this.alphaF);
+      image(filmScratch, this.filmOffsetX, this.filmOffsetY);
+      pop();
+
+      push();
       tint(255, this.alphaB);
       image(countBlank, this.countOffsetX, this.countOffsetY);
       pop();
@@ -353,6 +385,12 @@ class FullScreenScare {
       tint(255, this.alpha2);
       image(count2, this.countOffsetX, this.countOffsetY);
       pop();
+
+      push();
+      image(countOverlay, 0,0);
+      pop();
+
+      screenFlicker(0, 255, 100, 100);
 
     }
   }

@@ -18,7 +18,7 @@ class HowToScreen {
   }
 
   page2(){
-    image(howTo2,0,0);
+    image(howTo2,-200,-80);
   }
 
   //NEXTBUTTON AND BACKBUTTON NAVIGAITON//
