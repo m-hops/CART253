@@ -23,10 +23,12 @@ class WheelObject extends Interactable {
     spawnInteractWheel(this);
   }
 
+  //ACTIVATES WHEN USER IS OVER INTERACTABLE//
   onMouseEnter() {
     cursor('assets/images/cursorIconOverlayRed.png');
   }
 
+  //ACTIVATES WHEN USER IS NOT OVER INTERACTABLE//
   onMouseLeave(){
     cursor('assets/images/cursorIconOverlay.png');
   }

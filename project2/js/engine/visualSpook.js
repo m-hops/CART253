@@ -17,13 +17,15 @@ class VisualSpook extends Interactable {
   }
 
   onClick(){
-
+    //HANDLED IN INTERACTABLE//
   }
 
   run() {
 
+    //IF SCARE IS ACTIVE//
     if (this.state == 'yes'){
 
+      //LOCKS TRIGGER POINT FOR SCARE IN PLACE AND MONITORS FOR ACTIVATION RANGE//
       let cameraX = width/2 - this.hostRoom.backgroundX;
       let distanceToCam = abs(this.x - cameraX);
 
@@ -35,12 +37,14 @@ class VisualSpook extends Interactable {
       }
     }
 
+    //ACTIVATES MOVEMENTS//
     else if (this.state == 'move') {
       this.x += this.speed;
       this.alpha += this.alphaSpeed;
     }
   }
 
+  //RANDOM EVENT GENERATOR//
   onEnter(){
 
     let odds = random(0,1);

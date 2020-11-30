@@ -117,6 +117,7 @@ class UniversalRoom extends Interactable {
     }
   }
 
+  //STOPS SOUNDS FROM ACTIVATING IN OTHER ROOMS//
   onExit() {
     for (let i = 0; i < this.roomObjects.length; i++){
       this.roomObjects[i].onExit();

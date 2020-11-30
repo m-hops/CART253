@@ -12,11 +12,11 @@ class Interactable extends GameOBJ {
   }
 
   onMouseEnter(){
-
+    //HANDLED IN ATTACHED OBJECTS//
   }
 
   onMouseLeave(){
-    
+    //HANDLED IN ATTACHED OBJECTS//
   }
 
   onClick(){
