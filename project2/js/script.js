@@ -5,7 +5,7 @@ MADELINE ZAYTSOFF
 A POINT AND CLICK HORROR ADVENTURE
 **************************************************/
 
-//SPECIFICALLY TURNING OFF STRICT MODE DUE TO SOME ASSETS WHICH ARE STILL BEING WORKD ON OUTSIDE OF CLASS//
+'use strict'
 
 //GLOBAL VARIABLE FOR MENU NAVIGATION//
 let menu = 'clickToStart';
@@ -25,6 +25,8 @@ let introVideoSpecs;
 let userNotepadOBJ;
 let fullScreenScareOBJ;
 let logoIntro;
+let howToScreen;
+let userNotepad;
 
 //FONT PRELOAD NAMES//
 let glitchFont;
