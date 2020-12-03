@@ -246,6 +246,7 @@ class FullScreenScare {
         haveKey = false;
         fadeOutUnlock = false;
         activeScratch = false;
+        haveInteractWheel = false;
 
         fadeOutScreen.alpha = 0;
 

@@ -72,6 +72,7 @@ let count3;
 let count2;
 let countOverlay;
 let filmScratch;
+let dsImage;
 
 //SOUND PRELOAD NAMES//
 let startMusic;
